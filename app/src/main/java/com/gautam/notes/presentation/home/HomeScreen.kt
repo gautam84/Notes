@@ -48,7 +48,6 @@ fun HomeScreen(
 
             val list by viewModel.notes
 
-
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -63,8 +62,6 @@ fun HomeScreen(
                         viewModel.deleteNote(note)
                     })
                 }
-
-
             }
 
         }
@@ -81,7 +78,6 @@ fun HomeScreen(
 fun NoteCard(
     note: Note,
     onClick: (note: Note) -> Unit
-
 ) {
     Card(
         modifier = Modifier

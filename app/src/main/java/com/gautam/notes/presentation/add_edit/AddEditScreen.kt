@@ -23,8 +23,10 @@ import androidx.navigation.NavHostController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditScreen(
-    navController: NavHostController
-) {
+    navController: NavHostController,
+    viewModel: AddEditScreenViewModel = hiltViewModel(),
+
+    ) {
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -21,7 +21,7 @@ class AddEditScreenViewModel @Inject constructor(
     val titleText: State<String> = _titleText
 
     private val _contentText = mutableStateOf("")
-    val contentText: State<String> = _titleText
+    val contentText: State<String> = _contentText
 
     fun changeTitleText(
         text: String

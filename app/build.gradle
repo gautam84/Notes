@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'com.gautam.notes'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.gautam.notes"

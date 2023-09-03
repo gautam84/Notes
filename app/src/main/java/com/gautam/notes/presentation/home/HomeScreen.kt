@@ -18,17 +18,19 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.gautam.notes.domain.model.Note
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
-
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -40,13 +42,9 @@ fun HomeScreen(
                 .padding(8.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            val list = listOf(
-                Note("Note1", "Description1"),
-                Note("Note2", "Description2"),
-                Note("Note3", "Description3"),
-            )
 
 
+            val list by viewModel.notes
 
 
             LazyColumn(
@@ -55,7 +53,7 @@ fun HomeScreen(
                 contentPadding = PaddingValues(8.dp)
             ) {
                 item {
-                    Text(text ="Your Notes...", style = MaterialTheme.typography.titleLarge)
+                    Text(text = "Your Notes...", style = MaterialTheme.typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 items(list.size) {
@@ -67,7 +65,7 @@ fun HomeScreen(
 
         }
         Column(modifier = Modifier.padding(8.dp)) {
-            FloatingActionButton(onClick = { navController.navigate("add_edit_screen")}) {
+            FloatingActionButton(onClick = { navController.navigate("add_edit_screen") }) {
                 Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
             }
         }

@@ -6,6 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.gautam.notes.data.repository.NoteRepository
 import com.gautam.notes.domain.model.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,7 +38,7 @@ class AddEditScreenViewModel @Inject constructor(
 
     }
 
-    fun save(context: Context) {
+    fun save(context: Context, navHostController: NavHostController) {
 
         viewModelScope.launch {
             if (_titleText.value == "" && _contentText.value == ""){
@@ -49,6 +50,7 @@ class AddEditScreenViewModel @Inject constructor(
                         content = _contentText.value
                     )
                 )
+                navHostController.navigate("home_screen")
             }
 
         }

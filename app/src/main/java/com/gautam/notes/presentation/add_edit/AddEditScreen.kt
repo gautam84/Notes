@@ -60,7 +60,7 @@ val context = LocalContext.current
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { viewModel.save(context) }) {
+        Button(onClick = { viewModel.save(context, navController) }) {
             Text(text = "Save")
         }
 

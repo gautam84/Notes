@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -33,6 +34,7 @@ fun HomeScreen(
     navController: NavHostController,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
+    val list by viewModel.notes
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -46,8 +48,6 @@ fun HomeScreen(
         ) {
 
 
-            val list by viewModel.notes
-
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -57,10 +57,22 @@ fun HomeScreen(
                     Text(text = "Your Notes...", style = MaterialTheme.typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
-                items(list.size) { it ->
-                    NoteCard(note = list[it], onClick = {note->
-                        viewModel.deleteNote(note)
-                    })
+
+                if (list.isNotEmpty()) {
+                    items(list.size) { it ->
+                        NoteCard(note = list[it], onClick = { note ->
+                            viewModel.deleteNote(note)
+                        })
+                    }
+                } else {
+                    item {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(text = "Empty..", color = Color.Black.copy(0.5f))
+                        }
+                    }
                 }
             }
 
@@ -72,6 +84,8 @@ fun HomeScreen(
         }
     }
 }
+
+
 
 
 @Composable
@@ -88,7 +102,11 @@ fun NoteCard(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomEnd
         ) {
-            Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(8.dp)
+            ) {
                 Text(text = note.title, style = MaterialTheme.typography.titleMedium)
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = note.content)

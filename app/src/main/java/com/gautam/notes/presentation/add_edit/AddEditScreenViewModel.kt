@@ -41,7 +41,7 @@ class AddEditScreenViewModel @Inject constructor(
     fun save(context: Context, navHostController: NavHostController) {
 
         viewModelScope.launch {
-            if (_titleText.value == "" && _contentText.value == ""){
+            if (_titleText.value == "" ||  _contentText.value == ""){
                 Toast.makeText(context, "Please enter a valid Title and content", Toast.LENGTH_SHORT).show()
             } else {
                 repository.insertNote(

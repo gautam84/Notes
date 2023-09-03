@@ -2,7 +2,6 @@ package com.gautam.notes.presentation.add_edit
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.gautam.notes.data.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +17,20 @@ class AddEditScreenViewModel @Inject constructor(
 
     private val _contentText = mutableStateOf("")
     val contentText: State<String> = _titleText
+
+    fun changeTitleText(
+        text: String
+    ) {
+        _titleText.value = text
+
+    }
+
+    fun changeContentText(
+        text: String
+    ) {
+        _titleText.value = text
+
+    }
 
 
 }

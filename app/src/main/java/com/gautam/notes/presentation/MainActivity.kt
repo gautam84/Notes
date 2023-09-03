@@ -14,7 +14,9 @@ import androidx.navigation.compose.rememberNavController
 import com.gautam.notes.presentation.add_edit.AddEditScreen
 import com.gautam.notes.presentation.home.HomeScreen
 import com.gautam.notes.ui.theme.NotesTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

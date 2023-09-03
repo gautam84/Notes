@@ -18,6 +18,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,15 +35,14 @@ fun AddEditScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        var titleText by remember { mutableStateOf("") }
-        var contentText by remember { mutableStateOf("") }
+
 
 
         TextField(
             label = { Text(text = "Enter Title") },
-            value = titleText,
+            value = viewModel.titleText.value,
             onValueChange = {
-                titleText = it
+                viewModel.changeTitleText(it)
             },
             singleLine = true
         )
@@ -51,9 +51,9 @@ fun AddEditScreen(
         TextField(
             modifier = Modifier.height(150.dp),
             label = { Text(text = "Enter Content") },
-            value = contentText,
+            value = viewModel.contentText.value,
             onValueChange = {
-                contentText = it
+                            viewModel.changeContentText(it)
             },
             singleLine = false
         )

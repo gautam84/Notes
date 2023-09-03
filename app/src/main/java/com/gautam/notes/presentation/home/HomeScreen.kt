@@ -21,10 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.gautam.notes.domain.model.Note
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavHostController
+) {
 
 
     Box(
@@ -52,7 +55,7 @@ fun HomeScreen() {
                 contentPadding = PaddingValues(8.dp)
             ) {
                 item {
-                    Text("Your Notes...")
+                    Text(text ="Your Notes...", style = MaterialTheme.typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 items(list.size) {

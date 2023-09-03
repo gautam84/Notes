@@ -1,6 +1,5 @@
 package com.gautam.notes.presentation.home
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -20,9 +19,15 @@ class HomeScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.getNotes().collect{
+            repository.getNotes().collect {
                 _notes.value = it
             }
+        }
+    }
+
+    fun deleteNote(note: Note) {
+        viewModelScope.launch {
+            repository.deleteNote(note)
         }
     }
 

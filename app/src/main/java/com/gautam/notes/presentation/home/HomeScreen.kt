@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,8 +58,10 @@ fun HomeScreen(
                     Text(text = "Your Notes...", style = MaterialTheme.typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
-                items(list.size) {
-                    NoteCard(note = list[it])
+                items(list.size) { it ->
+                    NoteCard(note = list[it], onClick = {note->
+                        viewModel.deleteNote(note)
+                    })
                 }
 
 
@@ -75,17 +79,27 @@ fun HomeScreen(
 
 @Composable
 fun NoteCard(
-    note: Note
+    note: Note,
+    onClick: (note: Note) -> Unit
+
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(150.dp)
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = note.title, style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = note.content)
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+                Text(text = note.title, style = MaterialTheme.typography.titleMedium)
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = note.content)
+            }
+            IconButton(onClick = { onClick(note) }) {
+                Icon(imageVector = Icons.Outlined.Delete, contentDescription = null)
+            }
         }
 
 

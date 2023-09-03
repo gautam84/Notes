@@ -1,15 +1,20 @@
 package com.gautam.notes.presentation.add_edit
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gautam.notes.data.repository.NoteRepository
+import com.gautam.notes.domain.model.Note
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddEditScreenViewModel @Inject constructor(
-    repository: NoteRepository
+    private val repository: NoteRepository
 ) : ViewModel() {
 
     private val _titleText = mutableStateOf("")
@@ -28,8 +33,25 @@ class AddEditScreenViewModel @Inject constructor(
     fun changeContentText(
         text: String
     ) {
-        _titleText.value = text
+        _contentText.value = text
 
+    }
+
+    fun save(context: Context) {
+
+        viewModelScope.launch {
+            if (_titleText.value == "" && _contentText.value == ""){
+                Toast.makeText(context, "Please enter a valid Title and content", Toast.LENGTH_SHORT).show()
+            } else {
+                repository.insertNote(
+                    Note(
+                        title = _titleText.value,
+                        content = _contentText.value
+                    )
+                )
+            }
+
+        }
     }
 
 

@@ -41,7 +41,7 @@ fun SetupNavigation(){
         composable(
             route = "home_screen"
         ){
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
 
         composable(

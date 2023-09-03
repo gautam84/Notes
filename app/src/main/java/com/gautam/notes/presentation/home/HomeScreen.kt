@@ -67,7 +67,7 @@ fun HomeScreen(
 
         }
         Column(modifier = Modifier.padding(8.dp)) {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
+            FloatingActionButton(onClick = { navController.navigate("add_edit_screen")}) {
                 Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
             }
         }

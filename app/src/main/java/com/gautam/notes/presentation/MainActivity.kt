@@ -47,7 +47,7 @@ fun SetupNavigation(){
         composable(
             route = "add_edit_screen"
         ){
-            AddEditScreen()
+            AddEditScreen(navController = navController)
         }
     }
 }
